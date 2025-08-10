@@ -12,11 +12,11 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-amber-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <div className="absolute top-40 left-40 w-80 h-80 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
       </div>
 
@@ -27,18 +27,18 @@ const HeroSection = () => {
           }`}
         >
           <h1 className="text-5xl md:text-7xl font-bold text-gray-800 mb-6 leading-tight">
-            Sweet Haven Candies
+            Oak & Hide
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Indulge in our handcrafted candies made fresh daily, with flavors to
-            delight every sweet tooth.
+            Timeless Leather Craftsmanship - Discover handcrafted leather goods
+            designed to last a lifetime, blending elegance and durability.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-              Shop Now
+            <button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+              Shop Collection
             </button>
-            <button className="border-2 border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
-              View Flavors
+            <button className="border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              Our Craftsmanship
             </button>
           </div>
         </div>
@@ -52,13 +52,13 @@ const HeroSection = () => {
       >
         <div className="relative w-full h-full">
           <Image
-            src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=1200&h=600&fit=crop"
-            alt="Delicious candies"
+            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1200&h=600&fit=crop"
+            alt="Premium leather craftsmanship"
             fill
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-pink-50/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-amber-50/80 to-transparent"></div>
         </div>
       </div>
     </section>
@@ -85,17 +85,19 @@ const Navigation = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-pink-600">Sweet Haven</div>
+          <div className="text-2xl font-bold text-amber-600">Oak & Hide</div>
           <div className="hidden md:flex space-x-8">
-            {["Home", "Shop", "Flavors", "About", "Contact"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-gray-700 hover:text-pink-600 transition-colors duration-300 font-medium"
-              >
-                {item}
-              </a>
-            ))}
+            {["Home", "Shop", "Craftsmanship", "About", "Contact"].map(
+              (item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-gray-700 hover:text-amber-600 transition-colors duration-300 font-medium"
+                >
+                  {item}
+                </a>
+              )
+            )}
           </div>
           <button className="md:hidden text-gray-700">
             <svg
@@ -123,56 +125,57 @@ const ProductsSection = () => {
   const products = [
     {
       id: "product_1",
-      name: "Classic Caramel Delight",
-      price: 8.99,
+      name: "Heritage Leather Wallet",
+      price: 69.99,
       description:
-        "Rich, buttery caramel made in small batches for a melt-in-your-mouth experience.",
+        "A classic bi-fold wallet handcrafted from premium full-grain leather for timeless style.",
       image:
-        "https://images.unsplash.com/photo-1587245934737-6f63f39b07f8?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1580910051074-dc1a6c772e73?w=400&h=400&fit=crop",
     },
     {
       id: "product_2",
-      name: "Strawberry Swirl Fudge",
-      price: 9.49,
+      name: "Vintage Leather Messenger Bag",
+      price: 189.99,
       description:
-        "Creamy white chocolate fudge infused with real strawberry puree.",
+        "Spacious yet sleek, this messenger bag blends rustic charm with modern functionality.",
       image:
-        "https://images.unsplash.com/photo-1617196034616-d86bbd5d6b67?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=400&fit=crop",
     },
     {
       id: "product_3",
-      name: "Mint Chocolate Truffles",
-      price: 10.99,
+      name: "Minimalist Card Holder",
+      price: 39.99,
       description:
-        "Decadent dark chocolate truffles with a refreshing mint cream center.",
+        "Ultra-slim card holder made for those who travel light without compromising quality.",
       image:
-        "https://images.unsplash.com/photo-1608198093002-0cdb8ff14d9e?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=400&h=400&fit=crop",
     },
     {
       id: "product_4",
-      name: "Peanut Butter Crunch",
-      price: 8.49,
+      name: "Artisan Leather Belt",
+      price: 54.99,
       description:
-        "A delightful mix of creamy peanut butter and crispy bits covered in milk chocolate.",
+        "Durable leather belt with hand-stitched details and a solid brass buckle.",
       image:
-        "https://images.unsplash.com/photo-1617191519001-7a0464c5e42a?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1525977816735-3c6b3b7c8932?w=400&h=400&fit=crop",
     },
     {
       id: "product_5",
-      name: "Coconut Cream Bliss",
-      price: 9.99,
-      description: "Smooth coconut cream encased in rich dark chocolate.",
+      name: "Classic Tote Bag",
+      price: 149.99,
+      description:
+        "Elegant tote bag that pairs versatility with artisanal craftsmanship.",
       image:
-        "https://images.unsplash.com/photo-1617196034628-1df7b71b1b0b?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop",
     },
     {
       id: "product_6",
-      name: "Raspberry Ganache Bites",
-      price: 10.49,
+      name: "Premium Leather Watch Strap",
+      price: 89.99,
       description:
-        "Luxurious chocolate bites with a tangy raspberry ganache filling.",
+        "Hand-stitched leather watch strap that elevates any timepiece with sophistication.",
       image:
-        "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=400&h=400&fit=crop",
     },
   ];
 
@@ -181,11 +184,11 @@ const ProductsSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Our Sweet Collection
+            Our Leather Collection
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover our handcrafted candies, each made with love and the finest
-            ingredients
+            Discover our handcrafted leather goods, each piece tells a story of
+            tradition and quality
           </p>
         </div>
 
@@ -213,10 +216,10 @@ const ProductsSection = () => {
                   {product.description}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-pink-600">
+                  <span className="text-2xl font-bold text-amber-600">
                     ${product.price}
                   </span>
-                  <button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition-colors duration-300 transform hover:scale-105">
+                  <button className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full transition-colors duration-300 transform hover:scale-105">
                     Add to Cart
                   </button>
                 </div>
@@ -229,56 +232,115 @@ const ProductsSection = () => {
   );
 };
 
-// About Section Component
-const AboutSection = () => {
+// Craftsmanship Section Component
+const CraftsmanshipSection = () => {
   return (
     <section
-      id="about"
-      className="py-20 bg-gradient-to-br from-pink-50 to-rose-50"
+      id="craftsmanship"
+      className="py-20 bg-gradient-to-br from-amber-50 to-orange-50"
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              About Sweet Haven
+              Our Craftsmanship
             </h2>
             <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-              Sweet Haven Candies is dedicated to creating irresistible homemade
-              sweets, made fresh daily for pure delight.
+              Every piece is handcrafted using traditional techniques passed
+              down through generations of leather artisans.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Our journey began with a simple dream: to bring joy through the
-              art of candy making. Every piece is crafted with care, using only
-              the finest ingredients and traditional recipes passed down through
-              generations.
+              We source only the finest full-grain leathers and use
+              hand-stitching methods that ensure durability and beauty. Each
+              item is a testament to the art of leatherworking, designed to age
+              gracefully and develop character over time.
             </p>
             <div className="grid grid-cols-2 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-pink-600 mb-2">
-                  100+
+                <div className="text-3xl font-bold text-amber-600 mb-2">
+                  25+
                 </div>
-                <div className="text-gray-600">Happy Customers</div>
+                <div className="text-gray-600">Years Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-pink-600 mb-2">50+</div>
-                <div className="text-gray-600">Unique Flavors</div>
+                <div className="text-3xl font-bold text-amber-600 mb-2">
+                  100%
+                </div>
+                <div className="text-gray-600">Handcrafted</div>
               </div>
             </div>
           </div>
           <div className="relative">
             <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1608198093002-0cdb8ff14d9e?w=600&h=400&fit=crop"
-                alt="Candy making process"
+                src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop"
+                alt="Leather crafting process"
                 fill
                 className="object-cover"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl">
-              <div className="text-3xl font-bold text-pink-600 mb-2">
-                Fresh Daily
+              <div className="text-3xl font-bold text-amber-600 mb-2">
+                Premium Quality
               </div>
-              <div className="text-gray-600">Made with love every morning</div>
+              <div className="text-gray-600">Full-grain leather only</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// About Section Component
+const AboutSection = () => {
+  return (
+    <section id="about" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="relative">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src="https://images.unsplash.com/photo-1580910051074-dc1a6c772e73?w=600&h=400&fit=crop"
+                alt="Oak & Hide workshop"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl">
+              <div className="text-3xl font-bold text-amber-600 mb-2">
+                Since 1998
+              </div>
+              <div className="text-gray-600">Family tradition</div>
+            </div>
+          </div>
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              About Oak & Hide
+            </h2>
+            <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+              Oak & Hide is a boutique leather workshop crafting premium
+              wallets, bags, and accessories with timeless appeal.
+            </p>
+            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              Our journey began with a simple dream: to create leather goods
+              that are not just accessories, but heirlooms. Every piece is
+              crafted with care, using only the finest materials and traditional
+              techniques that ensure beauty and durability.
+            </p>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-amber-600 mb-2">
+                  500+
+                </div>
+                <div className="text-gray-600">Happy Customers</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-amber-600 mb-2">
+                  50+
+                </div>
+                <div className="text-gray-600">Unique Designs</div>
+              </div>
             </div>
           </div>
         </div>
@@ -290,7 +352,10 @@ const AboutSection = () => {
 // Contact Section Component
 const ContactSection = () => {
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-br from-amber-50 to-orange-50"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
@@ -306,9 +371,9 @@ const ContactSection = () => {
           <div>
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="bg-pink-100 p-3 rounded-full">
+                <div className="bg-amber-100 p-3 rounded-full">
                   <svg
-                    className="w-6 h-6 text-pink-600"
+                    className="w-6 h-6 text-amber-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -323,14 +388,14 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">Email</h3>
-                  <p className="text-gray-600">hello@sweethavencandies.com</p>
+                  <p className="text-gray-600">hello@oakandhide.com</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="bg-pink-100 p-3 rounded-full">
+                <div className="bg-amber-100 p-3 rounded-full">
                   <svg
-                    className="w-6 h-6 text-pink-600"
+                    className="w-6 h-6 text-amber-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -345,14 +410,14 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">Phone</h3>
-                  <p className="text-gray-600">+1 (555) 987-6543</p>
+                  <p className="text-gray-600">+1 (555) 765-4321</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="bg-pink-100 p-3 rounded-full">
+                <div className="bg-amber-100 p-3 rounded-full">
                   <svg
-                    className="w-6 h-6 text-pink-600"
+                    className="w-6 h-6 text-amber-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -376,14 +441,14 @@ const ContactSection = () => {
                     Address
                   </h3>
                   <p className="text-gray-600">
-                    456 Sugar Lane, Candyville, CA 90210
+                    789 Artisan Road, Heritage Town, TX 75001
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-2xl p-8">
+          <div className="bg-white rounded-2xl p-8 shadow-lg">
             <form className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -391,7 +456,7 @@ const ContactSection = () => {
                 </label>
                 <input
                   type="text"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors duration-300"
                   placeholder="Your name"
                 />
               </div>
@@ -401,7 +466,7 @@ const ContactSection = () => {
                 </label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors duration-300"
                   placeholder="your@email.com"
                 />
               </div>
@@ -411,13 +476,13 @@ const ContactSection = () => {
                 </label>
                 <textarea
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors duration-300"
                   placeholder="Your message..."
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
+                className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold transition-colors duration-300 transform hover:scale-105"
               >
                 Send Message
               </button>
@@ -436,17 +501,18 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold text-pink-400 mb-4">
-              Sweet Haven Candies
+            <h3 className="text-2xl font-bold text-amber-400 mb-4">
+              Oak & Hide
             </h3>
             <p className="text-gray-300 mb-4 max-w-md">
-              A boutique candy shop crafting fresh, homemade sweets with the
-              finest ingredients and a sprinkle of love.
+              At Oak & Hide, we create leather goods that are not just
+              accessories, but heirlooms. Crafting timeless pieces with premium
+              materials and traditional techniques.
             </p>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-400 hover:text-pink-400 transition-colors duration-300"
+                className="text-gray-400 hover:text-amber-400 transition-colors duration-300"
               >
                 <svg
                   className="w-6 h-6"
@@ -458,7 +524,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-pink-400 transition-colors duration-300"
+                className="text-gray-400 hover:text-amber-400 transition-colors duration-300"
               >
                 <svg
                   className="w-6 h-6"
@@ -470,7 +536,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-pink-400 transition-colors duration-300"
+                className="text-gray-400 hover:text-amber-400 transition-colors duration-300"
               >
                 <svg
                   className="w-6 h-6"
@@ -486,31 +552,33 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {["Home", "Shop", "Flavors", "About", "Contact"].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-300 hover:text-pink-400 transition-colors duration-300"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              {["Home", "Shop", "Craftsmanship", "About", "Contact"].map(
+                (item) => (
+                  <li key={item}>
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      className="text-gray-300 hover:text-amber-400 transition-colors duration-300"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                )
+              )}
             </ul>
           </div>
 
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <div className="space-y-2 text-gray-300">
-              <p>hello@sweethavencandies.com</p>
-              <p>+1 (555) 987-6543</p>
-              <p>456 Sugar Lane, Candyville, CA 90210</p>
+              <p>hello@oakandhide.com</p>
+              <p>+1 (555) 765-4321</p>
+              <p>789 Artisan Road, Heritage Town, TX 75001</p>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Sweet Haven Candies. All rights reserved.</p>
+          <p>&copy; 2024 Oak & Hide. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -524,6 +592,7 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <ProductsSection />
+      <CraftsmanshipSection />
       <AboutSection />
       <ContactSection />
       <Footer />
