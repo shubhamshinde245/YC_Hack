@@ -11,7 +11,7 @@ const { repoId } = await freestyle.createGitRepository({
     public: true,
 
     source: {
-        url: "https://github.com/freestyle-sh/freestyle-next",
+        url: "https://github.com/shubhamshinde245/YC_Hack.git",
         type: "git",
     },
 });
