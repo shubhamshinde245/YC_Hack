@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 // Product interface
@@ -11,9 +11,13 @@ interface Product {
   description: string;
   images: string[];
   category: string;
+  roastLevel?: string;
+  flavorNotes?: string[];
+  flowerType?: string;
+  arrangement?: string;
 }
 
-// Hero Section Component with cinematic background
+// Hero Section Component with split-screen layout
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -22,41 +26,73 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Cinematic Background Video/Image */}
-      <div className="absolute inset-0 w-full h-full">
+    <section className="relative min-h-screen flex overflow-hidden">
+      {/* Left Side - Coffee Background */}
+      <div className="w-1/2 relative">
         <div className="relative w-full h-full">
           <Image
-            src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1920&h=1080&fit=crop"
-            alt="Leather artisan at work"
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&h=1080&fit=crop"
+            alt="Coffee being poured"
             fill
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-amber-900/30"></div>
         </div>
       </div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto text-white">
-        <div
-          className={`transition-all duration-1500 ease-out transform ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
-          }`}
-        >
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight tracking-wide">
-            Oak & Hide
-          </h1>
-          <p className="text-2xl md:text-3xl text-amber-100 mb-12 max-w-4xl mx-auto leading-relaxed font-light">
-            Timeless Leather Craftsmanship
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-amber-600 hover:bg-amber-700 text-white px-10 py-4 rounded-full text-xl font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl border-2 border-amber-500">
-              Shop Collection
-            </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-4 rounded-full text-xl font-semibold transition-all duration-500 transform hover:scale-110">
-              Discover Our Story
-            </button>
+      {/* Right Side - Flowers Background */}
+      <div className="w-1/2 relative">
+        <div className="relative w-full h-full">
+          <Image
+            src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200&h=1080&fit=crop"
+            alt="Fresh flowers in sunlit kitchen"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-pink-900/30"></div>
+        </div>
+      </div>
+
+      {/* Hero Content Overlay */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="text-center px-6 max-w-6xl mx-auto text-white">
+          <div
+            className={`transition-all duration-1500 ease-out transform ${
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-20 opacity-0"
+            }`}
+          >
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight tracking-wide font-serif">
+              Bloom & Brew
+            </h1>
+            <p className="text-2xl md:text-3xl text-amber-100 mb-12 max-w-4xl mx-auto leading-relaxed font-light">
+              Mornings, Perfected
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("coffee-section")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="bg-amber-600 hover:bg-amber-700 text-white px-10 py-4 rounded-full text-xl font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl border-2 border-amber-500"
+              >
+                Shop Coffee
+              </button>
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("floral-section")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="bg-pink-600 hover:bg-pink-700 text-white px-10 py-4 rounded-full text-xl font-semibold transition-all duration-500 transform hover:scale-110 hover:shadow-2xl border-2 border-pink-500"
+              >
+                Shop Florals
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -71,209 +107,76 @@ const HeroSection = () => {
   );
 };
 
-// Story Scroll Section with crafting process panels
-const StoryScrollSection = () => {
-  const [activePanel, setActivePanel] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        const scrollProgress =
-          (window.innerHeight - rect.top) / window.innerHeight;
-        const panelIndex = Math.floor(scrollProgress * 4);
-        setActivePanel(Math.max(0, Math.min(3, panelIndex)));
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const panels = [
-    {
-      title: "Raw Materials",
-      subtitle: "Only full-grain, ethically sourced leather",
-      image:
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop",
-      description:
-        "We begin with the finest full-grain leather, carefully selected for its natural beauty and durability.",
-    },
-    {
-      title: "Hand-Stitching",
-      subtitle: "Traditional techniques passed down through generations",
-      image:
-        "https://images.unsplash.com/photo-1580910051074-dc1a6c772e73?w=1200&h=800&fit=crop",
-      description:
-        "Every stitch is placed by hand, ensuring strength and creating a unique pattern that tells our story.",
-    },
-    {
-      title: "Finishing Touches",
-      subtitle: "Applying wax, polishing brass buckles",
-      image:
-        "https://images.unsplash.com/photo-1525977816735-3c6b3b7c8932?w=1200&h=800&fit=crop",
-      description:
-        "The final steps bring out the leather's natural patina and add the perfect hardware accents.",
-    },
-    {
-      title: "Final Product",
-      subtitle: "A masterpiece ready for a lifetime of use",
-      image:
-        "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=1200&h=800&fit=crop",
-      description:
-        "Each piece is a testament to craftsmanship, designed to age beautifully and become more valuable over time.",
-    },
-  ];
-
-  return (
-    <section ref={sectionRef} className="relative min-h-screen bg-gray-900">
-      {panels.map((panel, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-all duration-1000 ${
-            activePanel === index ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <div className="relative w-full h-screen">
-            <Image
-              src={panel.image}
-              alt={panel.title}
-              fill
-              className="object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-black/50"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center text-white max-w-4xl mx-auto px-6">
-                <h2 className="text-5xl md:text-7xl font-bold mb-4 tracking-wide">
-                  {panel.title}
-                </h2>
-                <p className="text-2xl md:text-3xl text-amber-200 mb-6 font-light">
-                  {panel.subtitle}
-                </p>
-                <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
-                  {panel.description}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-
-      {/* Panel Indicators */}
-      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20">
-        <div className="space-y-4">
-          {panels.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActivePanel(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                activePanel === index
-                  ? "bg-amber-400 scale-125"
-                  : "bg-white/50 hover:bg-white"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Featured Collection Grid with hover animations
-const FeaturedCollection = () => {
+// Coffee Collection Section
+const CoffeeCollection = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const products: Product[] = [
+  const coffeeProducts: Product[] = [
     {
       id: 1,
-      name: "Heritage Leather Wallet",
-      price: 89.99,
+      name: "Colombian Sunrise Roast",
+      price: 24.99,
       description:
-        "A classic bi-fold wallet handcrafted from premium full-grain leather for timeless style.",
+        "A bright, citrusy medium roast with notes of caramel and orange blossom.",
       images: [
-        "https://images.unsplash.com/photo-1580910051074-dc1a6c772e73?w=400&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=400&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1525977816735-3c6b3b7c8932?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=400&fit=crop",
       ],
-      category: "Wallets",
+      category: "Coffee",
+      roastLevel: "Medium",
+      flavorNotes: ["Citrus", "Caramel", "Orange Blossom"],
     },
     {
       id: 2,
-      name: "Vintage Messenger Bag",
-      price: 249.99,
+      name: "Ethiopian Honey Blend",
+      price: 28.99,
       description:
-        "Spacious yet sleek, this messenger bag blends rustic charm with modern functionality.",
+        "Light roast with floral aromas and a smooth, honey-like sweetness.",
       images: [
-        "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop",
       ],
-      category: "Bags",
+      category: "Coffee",
+      roastLevel: "Light",
+      flavorNotes: ["Floral", "Honey", "Berry"],
     },
     {
       id: 3,
-      name: "Artisan Belt",
-      price: 79.99,
+      name: "Mocha Hazelnut Delight",
+      price: 32.99,
       description:
-        "Durable leather belt with hand-stitched details and a solid brass buckle.",
+        "Rich dark roast with chocolate undertones and a nutty finish.",
       images: [
-        "https://images.unsplash.com/photo-1525977816735-3c6b3b7c8932?w=400&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1580910051074-dc1a6c772e73?w=400&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=400&fit=crop",
       ],
-      category: "Accessories",
-    },
-    {
-      id: 4,
-      name: "Classic Tote Bag",
-      price: 189.99,
-      description:
-        "Elegant tote bag that pairs versatility with artisanal craftsmanship.",
-      images: [
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1580910051074-dc1a6c772e73?w=400&h=400&fit=crop",
-      ],
-      category: "Bags",
+      category: "Coffee",
+      roastLevel: "Dark",
+      flavorNotes: ["Chocolate", "Hazelnut", "Caramel"],
     },
   ];
 
-  const nextImage = () => {
-    if (selectedProduct) {
-      setCurrentImageIndex(
-        (prev) => (prev + 1) % selectedProduct.images.length
-      );
-    }
-  };
-
-  const prevImage = () => {
-    if (selectedProduct) {
-      setCurrentImageIndex((prev) =>
-        prev === 0 ? selectedProduct.images.length - 1 : prev - 1
-      );
-    }
-  };
-
   return (
-    <section className="py-24 bg-white">
+    <section
+      id="coffee-section"
+      className="py-24 bg-gradient-to-br from-amber-50 to-orange-100"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
-            Featured Collection
+          <h2 className="text-5xl md:text-6xl font-bold text-amber-900 mb-6 font-serif">
+            Featured Coffee Collection
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover our handcrafted leather goods, each piece tells a story of
-            tradition and quality
+          <p className="text-xl text-amber-700 max-w-3xl mx-auto">
+            Artisan coffee beans sourced from the world&apos;s finest regions,
+            roasted to perfection
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
-          {products.map((product, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {coffeeProducts.map((product, index) => (
             <div
               key={product.id}
-              className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 overflow-hidden cursor-pointer"
+              className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform hover:scale-105 hover:-translate-y-2 overflow-hidden cursor-pointer"
               onClick={() => setSelectedProduct(product)}
               style={{ animationDelay: `${index * 200}ms` }}
             >
@@ -284,23 +187,28 @@ const FeaturedCollection = () => {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  {product.category}
-                </div>
-                <div className="absolute bottom-4 left-4 right-4">
-                  <button className="w-full bg-white/90 backdrop-blur-sm text-gray-800 py-3 rounded-xl font-semibold opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                    Quick View
-                  </button>
+                <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {product.roastLevel}
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                <h3 className="text-2xl font-bold text-amber-900 mb-3">
                   {product.name}
                 </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-amber-700 mb-4 leading-relaxed">
                   {product.description}
                 </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {product.flavorNotes?.map((note, idx) => (
+                    <span
+                      key={idx}
+                      className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm"
+                    >
+                      {note}
+                    </span>
+                  ))}
+                </div>
                 <div className="flex items-center justify-between">
                   <span className="text-3xl font-bold text-amber-600">
                     ${product.price}
@@ -318,8 +226,8 @@ const FeaturedCollection = () => {
       {/* Product Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
-          <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="relative">
+          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-8">
               <button
                 onClick={() => setSelectedProduct(null)}
                 className="absolute top-4 right-4 z-10 bg-white/80 backdrop-blur-sm rounded-full p-2 hover:bg-white transition-colors duration-300"
@@ -339,90 +247,19 @@ const FeaturedCollection = () => {
                 </svg>
               </button>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
-                <div className="relative">
-                  <div className="relative h-96 rounded-2xl overflow-hidden">
-                    <Image
-                      src={selectedProduct.images[currentImageIndex]}
-                      alt={selectedProduct.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  {/* Image Navigation */}
-                  <div className="flex justify-center mt-4 space-x-2">
-                    <button
-                      onClick={prevImage}
-                      className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-300"
-                      aria-label="Previous image"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 19l-7-7 7-7"
-                        />
-                      </svg>
-                    </button>
-                    <div className="flex space-x-1">
-                      {selectedProduct.images.map((_, index: number) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentImageIndex(index)}
-                          className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                            currentImageIndex === index
-                              ? "bg-amber-600"
-                              : "bg-gray-300"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <button
-                      onClick={nextImage}
-                      className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-300"
-                      aria-label="Next image"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
-                  </div>
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-amber-900 mb-4">
+                  {selectedProduct.name}
+                </h2>
+                <p className="text-amber-700 mb-6">
+                  {selectedProduct.description}
+                </p>
+                <div className="text-4xl font-bold text-amber-600 mb-8">
+                  ${selectedProduct.price}
                 </div>
-
-                <div>
-                  <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                    {selectedProduct.name}
-                  </h2>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {selectedProduct.description}
-                  </p>
-                  <div className="text-4xl font-bold text-amber-600 mb-8">
-                    ${selectedProduct.price}
-                  </div>
-                  <button className="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 mb-4">
-                    Add to Cart
-                  </button>
-                  <button className="w-full border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300">
-                    Save for Later
-                  </button>
-                </div>
+                <button className="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>
@@ -432,16 +269,178 @@ const FeaturedCollection = () => {
   );
 };
 
-// About Section with rustic background
+// Floral Collection Section
+const FloralCollection = () => {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  const floralProducts: Product[] = [
+    {
+      id: 1,
+      name: "Spring Peony Mix",
+      price: 89.99,
+      description:
+        "A vibrant arrangement of spring peonies in soft pinks and whites.",
+      images: [
+        "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop",
+      ],
+      category: "Florals",
+      flowerType: "Peonies",
+      arrangement: "Bouquet",
+    },
+    {
+      id: 2,
+      name: "Rustic Sunflower Vase",
+      price: 64.99,
+      description:
+        "Cheerful sunflowers in a rustic mason jar, perfect for farmhouse decor.",
+      images: [
+        "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=400&fit=crop",
+      ],
+      category: "Florals",
+      flowerType: "Sunflowers",
+      arrangement: "Vase",
+    },
+    {
+      id: 3,
+      name: "Lavender Calm Basket",
+      price: 74.99,
+      description:
+        "Soothing lavender arrangement in a woven basket for a peaceful atmosphere.",
+      images: [
+        "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop",
+      ],
+      category: "Florals",
+      flowerType: "Lavender",
+      arrangement: "Basket",
+    },
+  ];
+
+  return (
+    <section
+      id="floral-section"
+      className="py-24 bg-gradient-to-br from-pink-50 to-rose-100"
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl md:text-6xl font-bold text-pink-900 mb-6 font-serif">
+            Seasonal Floral Picks
+          </h2>
+          <p className="text-xl text-pink-700 max-w-3xl mx-auto">
+            Fresh, locally sourced flowers arranged with care to brighten your
+            space
+          </p>
+        </div>
+
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+          {floralProducts.map((product, index) => (
+            <div
+              key={product.id}
+              className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform hover:scale-105 overflow-hidden cursor-pointer break-inside-avoid"
+              onClick={() => setSelectedProduct(product)}
+              style={{ animationDelay: `${index * 200}ms` }}
+            >
+              <div className="relative h-80 overflow-hidden">
+                <Image
+                  src={product.images[0]}
+                  alt={product.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-pink-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-4 right-4 bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {product.arrangement}
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-pink-900 mb-3">
+                  {product.name}
+                </h3>
+                <p className="text-pink-700 mb-4 leading-relaxed">
+                  {product.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-sm">
+                    {product.flowerType}
+                  </span>
+                  <span className="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-sm">
+                    {product.arrangement}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-3xl font-bold text-pink-600">
+                    ${product.price}
+                  </span>
+                  <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Product Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
+          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-8">
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-4 right-4 z-10 bg-white/80 backdrop-blur-sm rounded-full p-2 hover:bg-white transition-colors duration-300"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              <div className="text-center">
+                <h2 className="text-3xl font-bold text-pink-900 mb-4">
+                  {selectedProduct.name}
+                </h2>
+                <p className="text-pink-700 mb-6">
+                  {selectedProduct.description}
+                </p>
+                <div className="text-4xl font-bold text-pink-600 mb-8">
+                  ${selectedProduct.price}
+                </div>
+                <button className="w-full bg-pink-600 hover:bg-pink-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
+// Lifestyle Section (Coffee + Flowers)
+
+// About Section with coffee & florals theme
 const AboutSection = () => {
   return (
-    <section className="py-24 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 relative overflow-hidden">
-      {/* Rustic texture overlay */}
-      <div className="absolute inset-0 opacity-10">
+    <section className="py-24 bg-gradient-to-br from-pink-50 via-amber-50 to-pink-100 relative overflow-hidden">
+      {/* Floral pattern overlay */}
+      <div className="absolute inset-0 opacity-5">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Cpath d='M30 30c0-16.569 13.431-30 30-30v60c-16.569 0-30-13.431-30-30zm0 0c0 16.569-13.431 30-30 30v-60c16.569 0 30 13.431 30 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         ></div>
       </div>
@@ -449,19 +448,18 @@ const AboutSection = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-8">
-              About Oak & Hide
+            <h2 className="text-5xl md:text-6xl font-bold text-amber-900 mb-8 font-serif">
+              About Bloom & Brew
             </h2>
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-              At Oak & Hide, we create leather goods that are not just
-              accessories, but heirlooms. Our journey began with a simple dream:
-              to create leather goods that stand the test of time.
+            <p className="text-xl text-amber-700 mb-8 leading-relaxed">
+              At Bloom & Brew, we believe in the perfect morning ritual. Our
+              journey began with a simple dream: to create moments of beauty and
+              warmth that start your day right.
             </p>
-            <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-              Every piece is crafted with care, using only the finest materials
-              and traditional techniques that ensure beauty and durability. We
-              believe in the slow craft movement, where quality takes precedence
-              over quantity.
+            <p className="text-lg text-amber-600 mb-10 leading-relaxed">
+              We source our coffee beans ethically from the world&apos;s finest
+              regions and grow our flowers sustainably, ensuring every product
+              tells a story of care and quality.
             </p>
             <button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
               Meet the Makers
@@ -471,17 +469,15 @@ const AboutSection = () => {
           <div className="relative">
             <div className="relative h-96 rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1580910051074-dc1a6c772e73?w=600&h=400&fit=crop"
-                alt="Oak & Hide workshop"
+                src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=400&fit=crop"
+                alt="Coffee beans and flowers"
                 fill
                 className="object-cover"
               />
             </div>
             <div className="absolute -bottom-8 -right-8 bg-white rounded-2xl p-8 shadow-xl">
-              <div className="text-4xl font-bold text-amber-600 mb-2">25+</div>
-              <div className="text-gray-600 font-medium">
-                Years of Craftsmanship
-              </div>
+              <div className="text-4xl font-bold text-pink-600 mb-2">100%</div>
+              <div className="text-gray-600 font-medium">Ethically Sourced</div>
             </div>
           </div>
         </div>
@@ -493,17 +489,17 @@ const AboutSection = () => {
 // Sticky Contact Footer
 const ContactFooter = () => {
   return (
-    <footer className="bg-gray-900 text-white py-16 relative">
+    <footer className="bg-gradient-to-br from-amber-900 to-pink-900 text-white py-16 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-3xl font-bold text-amber-400 mb-6">
-              Oak & Hide
+            <h3 className="text-3xl font-bold text-amber-400 mb-6 font-serif">
+              Bloom & Brew
             </h3>
             <p className="text-gray-300 mb-8 max-w-2xl leading-relaxed">
-              We create leather goods that are not just accessories, but
-              heirlooms. Crafting timeless pieces with premium materials and
-              traditional techniques.
+              We create the perfect morning ritual with ethically sourced coffee
+              beans and sustainably grown flowers, bringing beauty and warmth to
+              start your day right.
             </p>
 
             {/* Contact Info */}
@@ -526,11 +522,11 @@ const ContactFooter = () => {
                     </svg>
                   </div>
                   <span className="text-gray-300 hover:text-amber-400 transition-colors duration-300 cursor-pointer">
-                    hello@oakandhide.com
+                    hello@bloomandbrew.com
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <div className="bg-amber-600 p-2 rounded-full">
+                  <div className="bg-pink-600 p-2 rounded-full">
                     <svg
                       className="w-5 h-5 text-white"
                       fill="none"
@@ -545,8 +541,8 @@ const ContactFooter = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-gray-300 hover:text-amber-400 transition-colors duration-300 cursor-pointer">
-                    +1 (555) 765-4321
+                  <span className="text-gray-300 hover:text-pink-400 transition-colors duration-300 cursor-pointer">
+                    +1 (555) 123-4567
                   </span>
                 </div>
               </div>
@@ -575,7 +571,7 @@ const ContactFooter = () => {
                     </svg>
                   </div>
                   <span className="text-gray-300">
-                    789 Artisan Road, Heritage Town, TX 75001
+                    123 Coffee Lane, Garden District, CA 90210
                   </span>
                 </div>
               </div>
@@ -619,7 +615,7 @@ const ContactFooter = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Oak & Hide. All rights reserved.</p>
+          <p>&copy; 2024 Bloom & Brew. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -699,8 +695,8 @@ export default function Home() {
     <div className="min-h-screen">
       <Navigation />
       <HeroSection />
-      <StoryScrollSection />
-      <FeaturedCollection />
+      <CoffeeCollection />
+      <FloralCollection />
       <AboutSection />
       <ContactFooter />
 
